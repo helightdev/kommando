@@ -1,8 +1,8 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
-    application
     kotlin("jvm") version "1.7.10"
+    id("maven-publish")
 }
 
 repositories {
@@ -11,10 +11,6 @@ repositories {
 }
 
 val deckVersion = "0.5.1-BOT"
-
-application {
-    mainClass.set("com.example.ApplicationKt")
-}
 
 dependencies {
     implementation(project(":core"))
@@ -27,4 +23,19 @@ dependencies {
 val compileKotlin: KotlinCompile by tasks
 compileKotlin.kotlinOptions {
     jvmTarget = "1.8"
+}
+
+val sourcesJar by tasks.registering(Jar::class) {
+    classifier = "sources"
+    from(sourceSets.main.get().allSource)
+}
+
+publishing {
+    repositories {}
+    publications {
+        register("mavenJava", MavenPublication::class) {
+            from(components["java"])
+            artifact(sourcesJar.get())
+        }
+    }
 }
