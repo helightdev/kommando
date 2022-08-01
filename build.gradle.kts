@@ -5,6 +5,10 @@ repositories {
     mavenCentral()
 }
 
+plugins {
+    id("maven-publish")
+}
+
 allprojects {
     repositories {
         maven("https://jitpack.io")
