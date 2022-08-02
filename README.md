@@ -1,3 +1,5 @@
+![Version Badge](https://img.shields.io/github/v/release/helightdev/kommando)
+
 # Kommando
 Kommando is a KotlinJVM command framework mainly targeted towards
 [deck](https://github.com/SrGaabriel/deck), a [Guilded](https://www.guilded.gg/)
