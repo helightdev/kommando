@@ -8,4 +8,10 @@ data class Color(val hex: String) {
     override fun toString(): String {
         return "#$hex"
     }
+
+    companion object {
+        fun parse(value: String): Color {
+            return Color(value.removePrefix("#"))
+        }
+    }
 }

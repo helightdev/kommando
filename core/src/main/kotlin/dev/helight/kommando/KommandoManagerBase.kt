@@ -33,7 +33,17 @@ abstract class KommandoManagerBase: KommandoManager {
         commands.add(ReflectiveCommand(instance, method, this))
     }
 
-    fun registerClasses(clazz: Class<*>) {
+    /**
+     * Registers passed classes as commands.
+     */
+    fun registerClasses(vararg classes: Class<*>): Unit = classes.forEach {
+        registerClass(it)
+    }
+
+    /**
+     * Registers the passed class as a command.
+     */
+    fun registerClass(clazz: Class<*>) {
         traverseClassesDownwards(clazz) {
             val kClass = it.kotlin
             var instance: Any? = null

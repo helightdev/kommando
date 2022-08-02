@@ -10,7 +10,7 @@ import kotlin.coroutines.Continuation
 import kotlin.reflect.full.callSuspend
 import kotlin.reflect.jvm.*
 
-class ReflectiveCommand(val instance: Any? = null, val method: Method, val manager: KommandoManager) :
+class ReflectiveCommand(private val instance: Any? = null, private val method: Method, private val manager: KommandoManager) :
     KommandoBaseCommand(resolveKommandoPath(method), resolveKommandoScope(method)) {
 
     override val argumentContexts: List<ArgumentContext>
@@ -31,7 +31,7 @@ class ReflectiveCommand(val instance: Any? = null, val method: Method, val manag
         val syntaxMessage = method.getAnnotation(Syntax::class.java)?.text ?: argumentContexts
             .filterNot { it.serializer.isContextOnly }
             .joinToString(" ") { "<${it.name}>" }
-            .let { "!${path.joinToString(" ")} $it" }
+            .let { "${path.joinToString(" ")} $it" }
         syntaxDescription = "Can't process user input. Command Syntax: $syntaxMessage"
     }
 

@@ -33,7 +33,7 @@ class GroupRef(val id: GenericId, val client: DeckClient): GenericIdRef(id)
 
 class UserRef(val id: GenericId, val server: GenericId, val client: DeckClient): GenericIdRef(id) {
     suspend fun get(): RawServerMember {
-        return client.rest.server.getServerMember(id, server)
+        return client.rest.server.getServerMember(server, id)
     }
 }
 
@@ -49,7 +49,7 @@ class RoleRef(val id: IntGenericId, server: GenericId, val client: DeckClient): 
 class ChannelRef(val id: UUID, val client: DeckClient): RefWrapper(id) {
 
     suspend fun getRaw(): RawServerChannel {
-        return client.rest.channel.retrieveChannel(id)
+        return client.rest.channel.getChannel(id)
     }
 
     suspend fun get(): Channel {

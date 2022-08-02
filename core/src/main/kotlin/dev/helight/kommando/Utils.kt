@@ -15,8 +15,29 @@ import java.lang.reflect.Method
 @Target(AnnotationTarget.FUNCTION)
 annotation class KommandoDsl
 
+/**
+ * Wrapper method for [CommandRunner] allowing simpler access
+ * to coroutine suspension as well as common command context
+ * related data.
+ * @param block Suspended command action block
+ * inside the scope of [CommandRunContext]
+ * @return Any object that will be serialized using the best
+ * available [MessageFormatter] and then outputted as a normal
+ * chat reply to the original command request. Can be null to
+ * not return any output.
+ */
 @KommandoDsl
 fun <T> command(block: suspend CommandRunContext.() -> T) = CommandRunner(block)
+
+/**
+ * Wrapper method for [CommandRunner] allowing simpler access
+ * to coroutine suspension as well as common command context
+ * related data.
+ * @param block Suspended command action block
+ * inside the scope of [CommandRunContext]
+ */
+@KommandoDsl
+fun commandVoid(block: suspend CommandRunContext.() -> Unit) = CommandRunner(block)
 
 fun <T> Injector.tryGetInstance(clazz: Class<T>): T? {
     return try {

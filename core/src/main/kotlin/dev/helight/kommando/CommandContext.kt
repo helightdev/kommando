@@ -10,7 +10,7 @@ interface CommandContext {
     fun getPermissionNode(): KommandoPermissionNode? = null
     fun getModules(): Collection<Module>
 
-    fun reply(message: String)
+    suspend fun reply(message: String)
 
 }
 
