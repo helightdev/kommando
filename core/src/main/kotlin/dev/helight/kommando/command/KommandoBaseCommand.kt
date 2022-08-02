@@ -13,7 +13,7 @@ abstract class KommandoBaseCommand(val path: List<String>, val scopeType: Class<
 
     override fun accepts(context: CommandContext, scope: CommandScope): Boolean {
         if (context.fragments.size < path.size) return false
-        if (!path.mapIndexed { index, string -> string == context.fragments[index] }.all { it }) return false
+        if (!path.mapIndexed { index, string -> string.split("|").contains(context.fragments[index]) }.all { it }) return false
         if (!scopeType.isAssignableFrom(scope::class.java)) return false
         return true
     }

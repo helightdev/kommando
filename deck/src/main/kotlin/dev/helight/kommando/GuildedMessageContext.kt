@@ -30,13 +30,7 @@ class GuildedMessageContext(val manager: DeckCommandManager, val delegate: Messa
     override suspend fun reply(message: String) {
         if (manager.useReplyEmbed) {
             if (manager.replyEmbedFancyFooter) {
-                val member = try {
-                    delegate.client.rest.server.getServerMember(delegate.serverId!!, delegate.authorId)
-                } catch (e: Exception) {
-                    println("Get Server Member Error, fuck: ${delegate.authorId}@${delegate.serverId!!}")
-                    e.printStackTrace()
-                    error("")
-                }
+                val member = delegate.client.rest.server.getServerMember(delegate.serverId!!, delegate.authorId)
                 val user = member.user
                 val avatar = user.avatar.asNullable()
                 val name = member.nickname.asNullable() ?: user.name
@@ -73,7 +67,6 @@ class GuildedMessageContext(val manager: DeckCommandManager, val delegate: Messa
                 content = message
             }
         }
-        if (manager.deleteCommandMessage) delegate.delete()
     }
 }
 

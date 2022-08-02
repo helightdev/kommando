@@ -55,7 +55,7 @@ fun resolveKommandoPath(method: Method): List<String> = traverseMethodClassesUpw
     it.getAnnotation(Command::class.java)
 }.asReversed().toMutableList().apply {
     add(method.getAnnotation(Command::class.java))
-}.filterNotNull().map { it.name }.flatMap { it.split(" ") }
+}.filterNotNull().map { it.name }.flatMap { it.split(" ") }.filter { it.isNotBlank() }
 
 fun resolveKommandoScope(method: Method): Class<*> {
     val data = mutableListOf<Class<*>?>()

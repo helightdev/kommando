@@ -6,6 +6,7 @@ import dev.helight.kommando.command.CommandInvoker
 import dev.helight.kommando.prefix.PrefixProvider
 import dev.helight.kommando.prefix.SimplePrefixProvider
 import dev.helight.kommando.resolvers.MentionResolver
+import io.github.deck.common.util.asNullable
 import io.github.deck.core.DeckClient
 import io.github.deck.core.event.message.MessageCreateEvent
 
@@ -81,6 +82,7 @@ class DeckCommandManager(val client: DeckClient): KommandoManagerBase() {
             if (result.state != CommandResultState.NoContent) {
                 context.reply(result.content)
             }
+            if (deleteCommandMessage) event.message.delete()
         }
     }
 
