@@ -2,7 +2,7 @@ import org.jetbrains.dokka.gradle.DokkaPlugin
 import org.jetbrains.kotlin.gradle.plugin.KotlinPlatformJvmPlugin
 
 val projGroup = "dev.helight.kommando"
-val projVersion = "1.1-SNAPSHOT"
+val projVersion = "1.2-SNAPSHOT"
 
 group = projGroup
 version = projVersion
